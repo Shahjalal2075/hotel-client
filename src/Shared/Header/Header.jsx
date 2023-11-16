@@ -44,9 +44,9 @@ const Header = () => {
                 </div>
                 <div className="lg:hidden ">
                     <Link to={"/"}>
-                        <div className="flex gap-3">
+                        <div className="flex gap-3 items-center">
                             <img className="w-12" src="https://i.ibb.co/R79rgkZ/hotel.png" alt="Social Event" />
-                            <h2 className="text-base font-bold text-blue-800 hidden md:flex">Hotel</h2>
+                            <h2 className="text-base font-bold text-blue-800 md:flex">Hotel</h2>
                         </div>
                     </Link>
                 </div>
