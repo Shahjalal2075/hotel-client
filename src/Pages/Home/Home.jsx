@@ -1,4 +1,5 @@
 import AdsSlider from "./AdsSlider";
+import Newsletter from "./Newsletter";
 import Stunning from "./Stunning";
 import Testimonials from "./Testimonials";
 
@@ -9,8 +10,7 @@ const Home = () => {
             <AdsSlider></AdsSlider>
             <Stunning></Stunning>
             <Testimonials></Testimonials>
-
-            <h2 className=" text-center text-4xl font-bold text-black">News Seltter</h2>
+            <Newsletter></Newsletter>
         </div>
     );
 };

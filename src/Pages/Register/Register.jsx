@@ -74,7 +74,7 @@ const Register = () => {
 
                 <h2 className="text-4xl font-bold">Create Account</h2>
                 <p className="text-base font-medium mt-12">Please Enter Your Details</p>
-                <button onClick={handleGoogleSignin} className="border px-6 py-1 rounded-2xl text-xl font-semibold my-6 w-80 flex justify-center items-center gap-4">
+                <button onClick={handleGoogleSignin} className="border-[#38C6D1] border-2 px-6 py-1 rounded-2xl text-xl font-semibold my-6 w-80 flex justify-center items-center gap-4">
                     <img className="w-6" src="https://i.ibb.co/5kpQLKC/google.png" alt="Google" />
                     Log In with Google
                 </button>
@@ -96,7 +96,7 @@ const Register = () => {
 
             </div>
             <div className="flex justify-center items-center col-span-3">
-                <img className="w-3/4" src="https://i.ibb.co/jT8LTwP/logreg.png" alt="" />
+                <img className="w-3/4" src="https://i.ibb.co/hczH6xT/hotelentry.png" alt="" />
             </div>
         </div>
     );

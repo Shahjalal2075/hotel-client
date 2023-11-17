@@ -5,7 +5,7 @@ const TestimonialCard = ({ testimonial }) => {
     const {name,profile,position,company,message } = testimonial;
 
     return (
-        <div className='  bg-[#A2B7B5] text-center p-4 rounded-lg'>
+        <div className='  bg-[#38C6D1] text-center p-4 rounded-2xl'>
             <div className="items-center flex justify-center">
                 <img className="w-48 mask mask-circle" src={profile} />
             </div>

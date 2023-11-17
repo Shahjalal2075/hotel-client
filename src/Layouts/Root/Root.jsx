@@ -3,7 +3,7 @@ import Header from "../../Shared/Header/Header";
 
 const Root = () => {
     return (
-        <div>
+        <div className="bg-[#CCEAF8]">
             <div className="container mx-auto">
                 <Header></Header>
                 <Outlet></Outlet>
