@@ -1,5 +1,6 @@
 import AdsSlider from "./AdsSlider";
 import Stunning from "./Stunning";
+import Testimonials from "./Testimonials";
 
 
 const Home = () => {
@@ -7,8 +8,8 @@ const Home = () => {
         <div>
             <AdsSlider></AdsSlider>
             <Stunning></Stunning>
-            
-            <h2 className=" text-center text-4xl font-bold text-black">User Testimonials</h2>
+            <Testimonials></Testimonials>
+
             <h2 className=" text-center text-4xl font-bold text-black">News Seltter</h2>
         </div>
     );
