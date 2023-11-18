@@ -15,8 +15,8 @@ const MyBooking = () => {
     }, [user.email]);
 
     return (
-        <div>
-            <h2 className="text-5xl text-center font-bold my-16">My Booking Room</h2>
+        <div className="pb-32">
+            <h2 className="text-5xl text-center font-bold mb-16">My Booking Room</h2>
             <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-3 items-center">
                 {
                     rooms.map(room => <MyBookingCard

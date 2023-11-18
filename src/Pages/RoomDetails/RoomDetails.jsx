@@ -40,7 +40,8 @@ const RoomDetails = () => {
         const max = room.max;
         const date = bookingDate;
         const cover = room.cover;
-        const bookRoom = { email, title, max, date, cover };
+        const review = 1;
+        const bookRoom = { email, title, max, date, cover,review };
         console.log(bookRoom);
 
         Swal.fire({
@@ -60,7 +61,7 @@ const RoomDetails = () => {
                     headers: {
                         'content-type': 'application/json'
                     },
-                    body: JSON.stringify({available: `${room.available-1}`})
+                    body: JSON.stringify({available: `${room.available-1}`,review: `${room.review}`,star:`${room.star}`})
                 })
 
                 fetch('http://localhost:5000/booking', {
