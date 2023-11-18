@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { AuthContext } from "../../providers/AuthProvider";
@@ -9,13 +9,14 @@ const RoomDetails = () => {
 
     const { user } = useContext(AuthContext);
     const room = useLoaderData();
+    const navigate = useNavigate();
 
     const { _id, cover, title, max, star, review, price, details, size } = room;
 
     const rating = (star - (star % review)) / review;
 
     const [photos, setPhotos] = useState([]);
-    
+
     const [selectedDate, setSelectedDate] = useState(null);
 
     const handleDateChange = (date) => {
@@ -23,8 +24,8 @@ const RoomDetails = () => {
     };
 
     const bookingDate = selectedDate
-  ? `${selectedDate.getDate()}-${selectedDate.getMonth() + 1}-${selectedDate.getFullYear()}`
-  : 'No date selected';
+        ? `${selectedDate.getDate()}-${selectedDate.getMonth() + 1}-${selectedDate.getFullYear()}`
+        : 'No date selected';
 
     useEffect(() => {
         fetch(`http://localhost:5000/roomPhotos/${room.title}`)
@@ -54,13 +55,37 @@ const RoomDetails = () => {
         }).then((result) => {
             if (result.isConfirmed) {
 
+                fetch(`http://localhost:5000/rooms/${room.title}`,{
+                    method: 'PATCH',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify({available: `${room.available-1}`})
+                })
+
+                fetch('http://localhost:5000/booking', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(bookRoom)
+                })
+                    .then(res => {
+                        res.json()
+                        Swal.fire({
+                            title: "Room Booked Successful",
+                            text: `${title} ${max} person(s) for ${bookingDate} Price: ${price} tk`,
+                            icon: "success"
+                        });
+                        setTimeout(() => {
+                            navigate('/');
+                        }, 1500);
+                    })
+                    .then(data => {
+                        console.log(data);
+                    })
 
 
-                Swal.fire({
-                    title: "Room Booked Successful",
-                    text: `${title} ${max} person(s) for ${bookingDate} Price: ${price} tk`,
-                    icon: "success"
-                });
             }
         });
 
