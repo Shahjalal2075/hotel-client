@@ -1,6 +1,4 @@
 import { useContext, useEffect, useState } from "react";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { useLoaderData } from "react-router-dom";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -17,6 +15,16 @@ const RoomDetails = () => {
     const rating = (star - (star % review)) / review;
 
     const [photos, setPhotos] = useState([]);
+    
+    const [selectedDate, setSelectedDate] = useState(null);
+
+    const handleDateChange = (date) => {
+        setSelectedDate(date);
+    };
+
+    const bookingDate = selectedDate
+  ? `${selectedDate.getDate()}-${selectedDate.getMonth() + 1}-${selectedDate.getFullYear()}`
+  : 'No date selected';
 
     useEffect(() => {
         fetch(`http://localhost:5000/roomPhotos/${room.title}`)
@@ -29,39 +37,37 @@ const RoomDetails = () => {
         const email = user.email;
         const title = room.title;
         const max = room.max;
-        const date = selectedDate;
+        const date = bookingDate;
         const cover = room.cover;
-        const bookRoom = { email,title,max,date,cover };
+        const bookRoom = { email, title, max, date, cover };
         console.log(bookRoom);
 
         Swal.fire({
             title: "Confirm to Booked?",
-            text: `${title} ${max} person(s) for ${selectedDate} Price: ${price} tk`,
+            text: `${title} ${max} person(s) for ${bookingDate} Price: ${price} tk`,
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!"
-          }).then((result) => {
+            cancelButtonText: "No",
+            confirmButtonText: "Confirm!"
+        }).then((result) => {
             if (result.isConfirmed) {
-              Swal.fire({
-                title: "Deleted!",
-                text: "Your file has been deleted.",
-                icon: "success"
-              });
-            }
-          });
 
-        toast("Product Added Cart Succsessfull.");
+
+
+                Swal.fire({
+                    title: "Room Booked Successful",
+                    text: `${title} ${max} person(s) for ${bookingDate} Price: ${price} tk`,
+                    icon: "success"
+                });
+            }
+        });
+
     }
 
-    const [selectedDate, setSelectedDate] = useState(null);
 
-    const handleDateChange = (date) => {
-        setSelectedDate(date);
-    };
-
-    console.log('Date: ' + selectedDate);
+    console.log('Date: ' + bookingDate);
 
     return (
 
@@ -88,8 +94,6 @@ const RoomDetails = () => {
                             selected={selectedDate}
                             onChange={handleDateChange}
                             dateFormat="dd-MM-yyyy"
-                            showTimeSelect={false}
-                            showTimeInput={false}
                             placeholderText="Select a date"
                         />
                     </p>
@@ -121,7 +125,6 @@ const RoomDetails = () => {
                     <button onClick={handleAddCart} className='btn btn-neutral text-[#fff]'>Book Now</button>
                 </div>
             </div>
-            <ToastContainer />
         </div>
 
     );
