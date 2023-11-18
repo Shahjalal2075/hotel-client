@@ -1,10 +1,21 @@
 import PropTypes from 'prop-types';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
-const MyBookingCard = ({room}) => {
+const MyBookingCard = ({ room }) => {
 
+    const navigate = useNavigate();
 
-    const { _id,cover,title,date,max } = room;
+    const { _id, cover, title, date, max } = room;
+
+    const [rooms, setRooms] = useState([]);
+
+    useEffect(() => {
+        fetch(`http://localhost:5000/rooms/${title}`)
+            .then(res => res.json())
+            .then(data => setRooms(data))
+    }, [title]);
 
     const handleCancel = () => {
         Swal.fire({
@@ -18,6 +29,14 @@ const MyBookingCard = ({room}) => {
             confirmButtonText: "Confirm!"
         }).then((result) => {
             if (result.isConfirmed) {
+
+                fetch(`http://localhost:5000/rooms/${room.title}`,{
+                    method: 'PATCH',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify({available: `${rooms.available-(-1)}`})
+                })
 
                 fetch(`http://localhost:5000/booking/${_id}`, {
                     method: 'DELETE'
@@ -36,8 +55,8 @@ const MyBookingCard = ({room}) => {
                         }
                     })
                 setTimeout(() => {
-                    window.location.reload();
-                }, 600);
+                    navigate('/');
+                }, 1500);
             }
         })
 
