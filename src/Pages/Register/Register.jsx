@@ -4,6 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { AuthContext } from '../../providers/AuthProvider';
 import { Link, useNavigate } from 'react-router-dom';
 import { updateProfile } from 'firebase/auth';
+import { Helmet } from 'react-helmet-async';
 
 const Register = () => {
 
@@ -70,6 +71,10 @@ const Register = () => {
 
     return (
         <div className="grid lg:grid-cols-5 grid-cols-2">
+            <Helmet>
+                <title>Hotel | Create Account</title>
+                <meta name="description" content="Hotel Signup Section" />
+            </Helmet>
             <div className=" col-span-2 flex flex-col items-center justify-center">
 
                 <h2 className="text-4xl font-bold">Create Account</h2>

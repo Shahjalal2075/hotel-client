@@ -2,53 +2,56 @@ import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 const MyBookingCard = ({ room }) => {
 
     const navigate = useNavigate();
 
-    const { _id, cover, title, date, max, review } = room;
+    const { _id, cover, title, date, max } = room;
 
     const [rooms, setRooms] = useState([]);
 
-    const [value, setValue] = useState(1);
+    const [selectedDate, setSelectedDate] = useState(null);
+    const bookingDate = selectedDate
+        ? `${selectedDate.getDate()}-${selectedDate.getMonth() + 1}-${selectedDate.getFullYear()}`
+        : 'No date selected';
 
-    const rating = (rooms.star - (rooms.star % rooms.review)) / rooms.review;
-
-    const increment = () => {
-        setValue(prevValue => (prevValue < 5 ? prevValue + 1 : prevValue));
+    const handleDateChange = (date) => {
+        setSelectedDate(date);
     };
 
-    const decrement = () => {
-        setValue(prevValue => (prevValue > 1 ? prevValue - 1 : 1));
-    };
+    const [isChange, setIsChange] = useState(false);
 
-    const submitReview = () => {
-        fetch(`http://localhost:5000/rooms/${rooms.title}`, {
-            method: 'PATCH',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify({ available: `${rooms.available}`, review: `${rooms.review - (-1)}`, star: `${rooms.star - (-value)}` })
-        })
-        fetch(`http://localhost:5000/booking/${_id}`, {
-            method: 'PATCH',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify({ review: 0 })
-        })
+    const handleChangeDate = () => {
+        setIsChange(true);
+    }
+
+    const handleDateSubmit = () => {
+        if (bookingDate=="No date selected") {
+            setIsChange(false);
+        }
+        else {
+            fetch(`http://localhost:5000/booking/${_id}`, {
+                method: 'PATCH',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify({ date: bookingDate })
+            })
             .then(res => {
                 res.json()
                 Swal.fire({
-                    title: "Review Successful",
-                    text: `You rated ${value} out of 5`,
+                    title: "Date Change Successful",
+                    text: `Your Booking Date: ${bookingDate}`,
                     icon: "success"
                 });
                 setTimeout(() => {
                     navigate('/');
                 }, 1500);
             })
+        }
     }
 
     useEffect(() => {
@@ -105,41 +108,28 @@ const MyBookingCard = ({ room }) => {
     return (
         <div className="card card-side bg-base-100 shadow-xl">
             <figure className='w-1/2'><img src={cover} alt="Movie" /></figure>
-            <div className="card-body w-1/2">
+            <div className="card-body py-4 w-1/2">
                 <h2 className="text-xl font-bold ">{title}</h2>
                 <p className='text-base'><span className='font-bold'>Max. Guest:</span> {max} person(s)</p>
                 <p className='text-base font-bold'>{date}</p>
                 {
-                    (review == 1) ?
-                        <div className='flex justify-start'>
-                            <h2 className='text-base font-bold pr-4'>Rating: </h2>
-                            <button className='font-bold text-base' onClick={decrement}>-</button>
-                            <input className='w-12 text-center pl-3 font-bold text-base' type="number" value={value} readOnly />
-                            <button className='font-bold text-base' onClick={increment}>+</button>
-                            <button onClick={submitReview} className='font-bold text-base ml-6'>
-                                <img className='w-6' src="https://i.ibb.co/WG62Cdm/right.png" alt="" />
-                            </button>
+                    isChange ?
+                        <div className="flex items-center justify-center gap-4">
+                            <div className="">
+                                <DatePicker className="bg-[#CCEAF8] border-[#38C6D1] border-2 px-2 py-1 rounded-lg ml-3 w-48"
+                                    selected={selectedDate}
+                                    onChange={handleDateChange}
+                                    dateFormat="dd-MM-yyyy"
+                                    placeholderText="Select a date"
+                                />
+                            </div>
+                            <button><img onClick={handleDateSubmit} className='w-8' src="https://i.ibb.co/WG62Cdm/right.png" alt="" /></button>
                         </div>
                         :
-                        <div className="rating my-4">
-                            {
-                                (rating === 1) ? <input type="radio" name={_id} className="mask mask-star-2 bg-orange-400" checked /> : <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" />
-                            }
-                            {
-                                (rating === 2) ? <input type="radio" name={_id} className="mask mask-star-2 bg-orange-400" checked /> : <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" />
-                            }
-                            {
-                                (rating === 3) ? <input type="radio" name={_id} className="mask mask-star-2 bg-orange-400" checked /> : <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" />
-                            }
-                            {
-                                (rating === 4) ? <input type="radio" name={_id} className="mask mask-star-2 bg-orange-400" checked /> : <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" />
-                            }
-                            {
-                                (rating === 5) ? <input type="radio" name={_id} className="mask mask-star-2 bg-orange-400" checked /> : <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" />
-                            }
-                            <p className="text-lg mx-2">({rooms.review} Review)</p>
-                        </div>
+                        <button onClick={handleChangeDate} className='cursor-pointer bg-[#017EFF] text-lg rounded-2xl mt-2 text-center text-white px-2 py-1 font-semibold'>Change Date</button>
+
                 }
+
                 <button onClick={handleCancel} className='cursor-pointer bg-[#d33] text-lg rounded-2xl mt-2 text-center text-white px-2 py-1 font-semibold'>Cancel Room</button>
             </div>
         </div>

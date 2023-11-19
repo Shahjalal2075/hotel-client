@@ -3,6 +3,7 @@ import { AuthContext } from "../../providers/AuthProvider";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Helmet } from "react-helmet-async";
 
 
 const Login = () => {
@@ -56,6 +57,11 @@ const Login = () => {
 
     return (
         <div className="grid lg:grid-cols-5 grid-cols-2">
+
+            <Helmet>
+                <title>Hotel | Login</title>
+                <meta name="description" content="Hotel Login Section" />
+            </Helmet>
 
             <div className=" col-span-2 flex flex-col items-center justify-center">
 
