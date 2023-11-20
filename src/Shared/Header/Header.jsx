@@ -61,7 +61,7 @@ const Header = () => {
                                 }
                                 <Link className={isChecked ? 'text-[#fff]' : 'text-[#181818]'} onClick={handleLogOut}>Logout</Link>
                             </div>
-                            <h2 className="text-lg font-bold">{user.displayName}</h2>
+                            <h2 className="text-lg font-bold md:flex hidden">{user.displayName}</h2>
                         </div>
                         :
                         <div className="flex gap-8">

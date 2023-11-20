@@ -6,9 +6,9 @@ const AvailableRoomCard = ({ room }) => {
     const { cover,title,total,available,max } = room;
 
     return (
-        <div className="card card-side bg-base-100 shadow-xl">
-            <figure className='w-1/2'><img src={cover} alt="Movie" /></figure>
-            <div className="card-body w-1/2">
+        <div className="card md:card-side bg-base-100 shadow-xl">
+            <figure className='md:w-1/2'><img src={cover} alt="Movie" /></figure>
+            <div className="card-body md:w-1/2">
                 <h2 className="text-xl font-bold ">{title}</h2>
                 <p className='text-base'><span className='font-bold'>Max. Guest:</span> {max} person(s)</p>
                 <p className='text-base font-medium text-[#35B734]'>{available} rooms are available out of {total}</p>

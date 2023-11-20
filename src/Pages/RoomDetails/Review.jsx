@@ -92,8 +92,8 @@ const Review = ({room}) => {
     console.log("Review: "+writeReview.length);
 
     return (
-        <div className="flex">
-            <div className="w-1/2">
+        <div className="flex flex-col-reverse lg:flex-row">
+            <div className="lg:w-1/2">
                 <div className="grid grid-cols-1 gap-3 items-center">
                     {
                         reviews.map(review => <RoomReview
@@ -103,7 +103,7 @@ const Review = ({room}) => {
                     }
                 </div>
             </div>
-            <div className="w-1/2">
+            <div className="lg:w-1/2 items-center justify-center flex">
                 {
                     (writeReview.length != 0) ?
                         <div className="flex flex-col justify-center items-end">
