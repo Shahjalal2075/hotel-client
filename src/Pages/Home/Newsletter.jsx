@@ -1,11 +1,11 @@
 
 const Newsletter = () => {
     return (
-        <div className="flex items-center">
-            <div className="w-1/2 p-10">
+        <div className="flex flex-col md:flex-row items-center">
+            <div className="md:w-1/2 p-10">
                 <img className="w-full" src="https://i.ibb.co/vccZbt5/newsletter.png" alt="" />
             </div>
-            <div className="w-1/2 p-10">
+            <div className="md:w-1/2 p-10">
                 <h2 className="text-5xl font-bold mt-8">Subscribe to our Newsletter!</h2>
                 <p className="text-2xl font-semibold my-6">Subscribe to our Newsletter and stay<br />updated.</p>
                 <form className="flex flex-col justify-center" action="">
