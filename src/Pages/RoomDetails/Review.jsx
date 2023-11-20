@@ -45,7 +45,7 @@ const Review = ({room}) => {
         const message = e.target.message.value;
         const rating = e.target.star.value;
         const time = currentDateTime.toLocaleString();
-        const profile = user.photoURL;
+        const profile = user.photoURL?user.photoURL:"https://i.ibb.co/0rcvLrD/users.png";
         const title = room.title;
         const reviewMessage = { name, title, message, rating, time, profile };
         console.log(reviewMessage);
