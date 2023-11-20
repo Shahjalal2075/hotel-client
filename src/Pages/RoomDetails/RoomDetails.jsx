@@ -38,7 +38,7 @@ const RoomDetails = () => {
         : 'No date selected';
 
     useEffect(() => {
-        fetch(`http://localhost:5000/roomPhotos/${room.title}`)
+        fetch(`https://hotel-server-three.vercel.app/roomPhotos/${room.title}`)
             .then(res => res.json())
             .then(data => setPhotos(data))
     }, [room.title]);
@@ -86,7 +86,7 @@ const RoomDetails = () => {
         }).then((result) => {
             if (result.isConfirmed) {
 
-                fetch(`http://localhost:5000/rooms/${room.title}`, {
+                fetch(`https://hotel-server-three.vercel.app/rooms/${room.title}`, {
                     method: 'PATCH',
                     headers: {
                         'content-type': 'application/json'
@@ -94,7 +94,7 @@ const RoomDetails = () => {
                     body: JSON.stringify({ available: `${room.available - 1}`, review: `${room.review}`, star: `${room.star}` })
                 })
 
-                fetch('http://localhost:5000/booking', {
+                fetch('https://hotel-server-three.vercel.app/booking', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'

@@ -14,7 +14,7 @@ const Review = ({room}) => {
     const [writeReview, setWriteReview] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/booking/${user.email}/${room.title}/on`)
+        fetch(`https://hotel-server-three.vercel.app/booking/${user.email}/${room.title}/on`)
             .then(res => res.json())
             .then(data => setWriteReview(data))
     }, [user.email,room.title]);
@@ -22,7 +22,7 @@ const Review = ({room}) => {
     const [reviews, setReviews] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/review/${room.title}`)
+        fetch(`https://hotel-server-three.vercel.app/review/${room.title}`)
             .then(res => res.json())
             .then(data => setReviews(data))
     }, [room.title]);
@@ -50,7 +50,7 @@ const Review = ({room}) => {
         const reviewMessage = { name, title, message, rating, time, profile };
         console.log(reviewMessage);
 
-        fetch(`http://localhost:5000/booking/${user.email}/${room.title}/on`, {
+        fetch(`https://hotel-server-three.vercel.app/booking/${user.email}/${room.title}/on`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json'
@@ -58,7 +58,7 @@ const Review = ({room}) => {
             body: JSON.stringify({ review: "off" })
         })
 
-        fetch(`http://localhost:5000/rooms/${room.title}`, {
+        fetch(`https://hotel-server-three.vercel.app/rooms/${room.title}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json'
@@ -66,7 +66,7 @@ const Review = ({room}) => {
             body: JSON.stringify({ available: `${room.available}`, review: `${room.review - (-1)}`, star: `${room.star - (-rating)}` })
         })
 
-        fetch('http://localhost:5000/review', {
+        fetch('https://hotel-server-three.vercel.app/review', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

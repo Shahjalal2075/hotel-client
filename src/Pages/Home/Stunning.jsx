@@ -7,7 +7,7 @@ const Stunning = () => {
     const [stunning, setStunning] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/stunning')
+        fetch('https://hotel-server-three.vercel.app/stunning')
             .then(res => res.json())
             .then(data => setStunning(data))
     }, []);

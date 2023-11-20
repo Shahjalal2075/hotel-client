@@ -33,7 +33,7 @@ const MyBookingCard = ({ room }) => {
             setIsChange(false);
         }
         else {
-            fetch(`http://localhost:5000/booking/${_id}`, {
+            fetch(`https://hotel-server-three.vercel.app/booking/${_id}`, {
                 method: 'PATCH',
                 headers: {
                     'content-type': 'application/json'
@@ -55,7 +55,7 @@ const MyBookingCard = ({ room }) => {
     }
 
     useEffect(() => {
-        fetch(`http://localhost:5000/rooms/${title}`)
+        fetch(`https://hotel-server-three.vercel.app/rooms/${title}`)
             .then(res => res.json())
             .then(data => setRooms(data))
     }, [title]);
@@ -73,7 +73,7 @@ const MyBookingCard = ({ room }) => {
         }).then((result) => {
             if (result.isConfirmed) {
 
-                fetch(`http://localhost:5000/rooms/${room.title}`, {
+                fetch(`https://hotel-server-three.vercel.app/rooms/${room.title}`, {
                     method: 'PATCH',
                     headers: {
                         'content-type': 'application/json'
@@ -81,7 +81,7 @@ const MyBookingCard = ({ room }) => {
                     body: JSON.stringify({ available: `${rooms.available - (-1)}`, review: `${rooms.review}`, star: `${rooms.star}` })
                 })
 
-                fetch(`http://localhost:5000/booking/${_id}`, {
+                fetch(`https://hotel-server-three.vercel.app/booking/${_id}`, {
                     method: 'DELETE'
                 })
                     .then(res => {
