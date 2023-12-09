@@ -1,8 +1,10 @@
-# Live Link:
+# Hotel Booking
+
+## Live Link:
 
 link: https://hotel-1c071.web.app/
 
-# Website Features:
+## Website Features:
 
 - User Registration and Authentication
 
@@ -17,5 +19,18 @@ link: https://hotel-1c071.web.app/
 - if user booked the room then user review add for this room.
 
 - Google Signin method
+
+## :computer: Uses Languages and Tools
+
+<br>
+<p align="center">
+<img src="https://raw.githubusercontent.com/Shahjalal2075/Shahjalal2075/main/assets/icons/react.png"/>
+<img src="https://raw.githubusercontent.com/Shahjalal2075/Shahjalal2075/main/assets/icons/node.png"/>
+<img src="https://raw.githubusercontent.com/Shahjalal2075/Shahjalal2075/main/assets/icons/express.png"/>
+<img src="https://raw.githubusercontent.com/Shahjalal2075/Shahjalal2075/main/assets/icons/mongo.png"/>
+<img src="https://raw.githubusercontent.com/Shahjalal2075/Shahjalal2075/main/assets/icons/tailwind.png"/>
+<img src="https://raw.githubusercontent.com/Shahjalal2075/Shahjalal2075/main/assets/icons/firebase.png"/>
+<img src="https://raw.githubusercontent.com/Shahjalal2075/Shahjalal2075/main/assets/icons/JavaScript.png"/>
+</p><br/>
 
 
