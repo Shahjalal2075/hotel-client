@@ -8,6 +8,9 @@ import Room from "../Pages/Room/Room";
 import RoomDetails from "../Pages/RoomDetails/RoomDetails";
 import MyBooking from "../Pages/MyBooking/MyBooking";
 import PrivateRoute from "./PrivateRoute";
+import Profile from "../Pages/Profile/Profile";
+import EditProfile from "../Pages/Profile/EditProfile";
+import Payment from "../Pages/Payment/Payment";
 
 const Routes = createBrowserRouter([
     {
@@ -28,8 +31,20 @@ const Routes = createBrowserRouter([
                 element: <Register></Register>
             },
             {
+                path: "/profile",
+                element: <PrivateRoute><Profile></Profile></PrivateRoute>
+            },
+            {
+                path: "/edit",
+                element: <PrivateRoute><EditProfile></EditProfile></PrivateRoute>
+            },
+            {
                 path: "/room",
                 element: <Room></Room>
+            },
+            {
+                path: "/payment",
+                element: <PrivateRoute><Payment></Payment></PrivateRoute>
             },
             {
                 path: "/room/:title",

@@ -56,12 +56,16 @@ const Header = () => {
                     user ?
                         <div className="flex flex-col items-center justify-center gap-2 border p-2 rounded-lg font-bold">
                             <div className="flex gap-2 justify-center items-center">
-                                {
-                                    user.photoURL ? <img className="mask mask-circle w-12" src={user.photoURL} /> : <img className="mask mask-circle w-12" src="https://i.ibb.co/0rcvLrD/users.png" />
-                                }
+                                <Link to={'/profile'}>
+                                    {
+                                        user.photoURL ? <img className="mask mask-circle w-12" src={user.photoURL} /> : <img className="mask mask-circle w-12" src="https://i.ibb.co/0rcvLrD/users.png" />
+                                    }
+                                </Link>
                                 <Link className={isChecked ? 'text-[#fff]' : 'text-[#181818]'} onClick={handleLogOut}>Logout</Link>
                             </div>
-                            <h2 className="text-lg font-bold md:flex hidden">{user.displayName}</h2>
+                            <Link to={'/profile'}>
+                                <h2 className="text-lg font-bold md:flex hidden">{user.displayName}</h2>
+                            </Link>
                         </div>
                         :
                         <div className="flex gap-8">

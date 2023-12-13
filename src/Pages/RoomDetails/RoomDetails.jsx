@@ -103,14 +103,10 @@ const RoomDetails = () => {
                 })
                     .then(res => {
                         res.json()
-                        Swal.fire({
-                            title: "Room Booked Successful",
-                            text: `${title} ${max} person(s) for ${bookingDate} Price: ${price} $`,
-                            icon: "success"
-                        });
+                        
                         setTimeout(() => {
-                            navigate('/');
-                        }, 1500);
+                            navigate('/payment');
+                        }, 1000);
                     })
                     .then(data => {
                         console.log(data);
